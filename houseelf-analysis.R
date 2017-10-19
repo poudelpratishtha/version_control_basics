@@ -19,3 +19,11 @@ get_size_class <- function(ear_length){
    ear_lengths <- ifelse(ear_length > 10, "large", "small")
    return(ear_lengths)
 }
+
+# Creates a new data frame
+
+new_df <- data.frame(id=houseelf_data$id, earlength_class=NA, gc_content=NA)
+new_df$earlength_class <- sapply(houseelf_data$earlength, get_size_class)
+new_df$gc_content <- sapply(houseelf_data$dnaseq, gc_content)
+
+write.csv(new_df, "new_df_with_class&GCcontent")
